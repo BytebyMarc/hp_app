@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'homePage/HomePage.dart';
+import 'navigation_cubit.dart';
+
 
 void main() {
-  runApp(const MyApp());
+  runApp(BlocProvider(
+    create: (_) => NavigationCubit(),
+    child: const MyApp(),
+  ),
+  );
 }
 
 class MyApp extends StatelessWidget {
