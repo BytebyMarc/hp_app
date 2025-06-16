@@ -1,20 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/lexikon/lexikon_bloc.dart';
 import 'lexikon_bloc.dart';
 import 'lexikon_event.dart';
 import 'lexikon_state.dart';
 
 class Lexikon extends StatelessWidget {
 
-  const Lexikon({super.key})
+  const Lexikon({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-            title: const Text('Lexikon: Heilpraktiker für Psychotherapie')),
+
         drawer: Drawer(),
         body: BlocBuilder<LexikonBloc, LexikonState>(
             builder: (context, state) {
@@ -45,7 +43,7 @@ class Lexikon extends StatelessWidget {
                 return Center(child: Text('Fehler: ${state.message}'));
 
               }
-              context.read<LexikonBloc>().add(LoadLexikon());
+              //context.read<LexikonBloc>().add(LoadLexikon());
               return const SizedBox.shrink();
 
             }

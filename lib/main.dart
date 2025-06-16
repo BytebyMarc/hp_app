@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/BurgerMenu/BurgerMenu.dart';
+import 'lexikon/lexikon_event.dart';
 import 'navigation_cubit.dart';
+import 'lexikon/lexikon_bloc.dart';
 
 
 void main() {
   runApp(BlocProvider(
     create: (_) => NavigationCubit(),
-    child: const MyApp(),
+    child: MultiBlocProvider(providers: [
+      BlocProvider(create: (_) => NavigationCubit()),
+      BlocProvider(create: (_) => LexikonBloc()..add(LoadLexikon())),
+        ], child: const MyApp())
   ),
   );
 }

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/navigation_cubit.dart';
 
+import '../lexikon/lexikon.dart';
+
 class BurgerMenu extends StatelessWidget {
   const BurgerMenu({super.key});
 
@@ -23,7 +25,7 @@ class BurgerMenu extends StatelessWidget {
             case MenuItem.faq:
               return const Center(child: Text('Häufige Fragen'));
             case MenuItem.lexikon:
-              return const Center(child: Text('Lexikon'));
+              return Lexikon();
             case MenuItem.datenschutz:
               return const Center(child: Text('Datenschutz'));
             case MenuItem.settings:

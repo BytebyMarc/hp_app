@@ -1,6 +1,24 @@
-part of 'lexikon_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:hp_app/models/lexikon_entry.dart';
 
 @immutable
-sealed class LexikonState {}
+sealed class LexikonState {
+  const LexikonState();
+}
 
-final class LexikonInitial extends LexikonState {}
+class LexikonInitial extends LexikonState {
+  const LexikonInitial();
+}
+
+class LexikonLoading extends LexikonState{
+  const LexikonLoading();
+}
+class LexikonLoaded extends LexikonState{
+  final List<LexikonEntry> entries;
+  const LexikonLoaded(this.entries);
+}
+class LexikonError extends LexikonState {
+  final String message;
+  const LexikonError(this.message);
+}
+

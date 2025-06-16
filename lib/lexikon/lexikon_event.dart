@@ -1,4 +1,11 @@
-part of 'lexikon_bloc.dart';
+import 'package:flutter/material.dart';
+
 
 @immutable
-sealed class LexikonEvent {}
+sealed class LexikonEvent {
+  const LexikonEvent();
+}
+
+class LoadLexikon extends LexikonEvent{
+  const LoadLexikon();
+}
