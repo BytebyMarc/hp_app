@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'homePage/HomePage.dart';
+import 'package:hp_app/BurgerMenu/BurgerMenu.dart';
 import 'navigation_cubit.dart';
 
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomePage(),
+      home: BurgerMenu(),
     );
   }
 }
