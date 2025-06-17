@@ -9,3 +9,10 @@ sealed class LexikonEvent {
 class LoadLexikon extends LexikonEvent{
   const LoadLexikon();
 }
+
+
+class SearchLexikon extends LexikonEvent{
+
+  final String query;
+  SearchLexikon(this.query);
+}

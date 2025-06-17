@@ -37,10 +37,38 @@ class LexikonEntry {
       description:
       'Traumatherapie behandelt die Folgen traumatischer Erlebnisse durch gezielte psychotherapeutische Verfahren.',
     ),
+    LexikonEntry(
+      term: 'Traumatherapie',
+      description:
+      'Traumatherapie behandelt die Folgen traumatischer Erlebnisse durch gezielte psychotherapeutische Verfahren.',
+    ),
+    LexikonEntry(
+      term: 'Traumatherapie',
+      description:
+      'Traumatherapie behandelt die Folgen traumatischer Erlebnisse durch gezielte psychotherapeutische Verfahren.',
+    ),
+    LexikonEntry(
+      term: 'Traumatherapie',
+      description:
+      'Traumatherapie behandelt die Folgen traumatischer Erlebnisse durch gezielte psychotherapeutische Verfahren.',
+    ),
+    LexikonEntry(
+      term: 'Traumatherapie',
+      description:
+      'Traumatherapie behandelt die Folgen traumatischer Erlebnisse durch gezielte psychotherapeutische Verfahren.',
+    ),
+    LexikonEntry(
+      term: 'Traumatherapie',
+      description:
+      'Traumatherapie behandelt die Folgen traumatischer Erlebnisse durch gezielte psychotherapeutische Verfahren.',
+    ),
+    LexikonEntry(
+      term: 'Traumatherapie',
+      description:
+      'Traumatherapie behandelt die Folgen traumatischer Erlebnisse durch gezielte psychotherapeutische Verfahren.',
+    ),
+
   ];
-
-
-
 
 
   Map<String, dynamic> toJson() => {

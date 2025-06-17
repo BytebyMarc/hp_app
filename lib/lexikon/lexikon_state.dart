@@ -15,7 +15,7 @@ class LexikonLoading extends LexikonState{
 }
 class LexikonLoaded extends LexikonState{
   final List<LexikonEntry> entries;
-  const LexikonLoaded(this.entries);
+  const LexikonLoaded(this.entries); // konstruktor
 }
 class LexikonError extends LexikonState {
   final String message;

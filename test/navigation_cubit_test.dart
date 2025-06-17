@@ -16,10 +16,24 @@ void main() {
     });
 
     blocTest<NavigationCubit, MenuItem>(
-      'emits [settings] when select(settungs) is called',
+      'emits [proVersion] when select(proVersion) is called',
+      build: () => NavigationCubit(),
+      act: (c) => c.selectMenu(MenuItem.proVersion),
+      expect: () => [MenuItem.proVersion],
+    );
+    blocTest<NavigationCubit, MenuItem>(
+      'emits [shop] when select(shop) is called',
+      build: () => NavigationCubit(),
+      act: (c) => c.selectMenu(MenuItem.shop),
+      expect: () => [MenuItem.shop],
+    );
+    blocTest<NavigationCubit, MenuItem>(
+      'emits [settings] when select(settings) is called',
       build: () => NavigationCubit(),
       act: (c) => c.selectMenu(MenuItem.settings),
       expect: () => [MenuItem.settings],
     );
+
+
   });
 }

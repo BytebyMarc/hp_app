@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/navigation_cubit.dart';
 
 import '../lexikon/lexikon.dart';
+import '../settings/settings.dart';
 
 class BurgerMenu extends StatelessWidget {
   const BurgerMenu({super.key});
@@ -29,7 +30,7 @@ class BurgerMenu extends StatelessWidget {
             case MenuItem.datenschutz:
               return const Center(child: Text('Datenschutz'));
             case MenuItem.settings:
-              return const Center(child: Text('Einstellung'));
+              return Settings();
             case MenuItem.registieren:
               return const Center(child: Text('Registieren'));
             case MenuItem.shop:
