@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/navigation_cubit.dart';
 
+import '../home/home.dart';
 import '../lexikon/lexikon.dart';
 import '../settings/settings.dart';
 
@@ -43,7 +44,7 @@ class BurgerMenu extends StatelessWidget {
               return const Center(child: Text('Youtube'));
             case MenuItem.home:
             default:
-              return const Center(child: Text('Startseite'));
+              return Home();
           }
         },
       ),
