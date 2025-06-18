@@ -44,7 +44,7 @@ class BurgerMenu extends StatelessWidget {
               return const Center(child: Text('Youtube'));
             case MenuItem.home:
             default:
-              return Home();
+              return HomeScreen();
           }
         },
       ),

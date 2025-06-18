@@ -8,15 +8,13 @@ import 'settings/appTheme.dart';
 import 'package:hp_app/settings/theme_bloc.dart';
 import 'settings/theme_state.dart';
 
-
-
-
 void main() {
   runApp(BlocProvider(
     create: (_) => NavigationCubit(),
     child: MultiBlocProvider(providers: [
       BlocProvider(create: (_) => ThemeBloc()),
       BlocProvider(create: (_) => NavigationCubit()),
+      BlocProvider(create: (_) => NavigationHome()),
       BlocProvider(create: (_) => LexikonBloc()..add(LoadLexikon())),
         ], child: const MyApp())
   ),
@@ -26,17 +24,14 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // BlocBuilder liefert hier den aktuellen ThemeState als zweiten Parameter
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, themeState) {
         return MaterialApp(
           title: 'Hppsy Prüfungstrainer',
           theme: AppTheme.lightTheme,
           darkTheme: AppTheme.darkTheme,
-          // Nutze themeState.themeMode – themeState ist nur hier sichtbar!
           themeMode: themeState.themeMode,
           home: const BurgerMenu(),
         );
