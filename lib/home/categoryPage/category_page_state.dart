@@ -1,27 +1,29 @@
 import 'package:equatable/equatable.dart';
 import 'package:hp_app/models/categoryModel.dart';
 
-abstract class CategoryPageState extends Equatable {
-  const CategoryPageState();
-  @override List<Object> get props => [];
+
+abstract class CategoryState extends Equatable {
+  const CategoryState();
+  @override
+  List<Object> get props => [];
 }
 
-class CategoriesLoading extends CategoryPageState {}
-
-class CategoriesLoaded extends CategoryPageState {
+class CategoriesLoading extends CategoryState {}
+class CategoriesLoaded extends CategoryState {
   final List<Category> categories;
   const CategoriesLoaded(this.categories);
-  @override List<Object> get props => [categories];
+  @override
+  List<Object> get props => [categories];
 }
-
-class CategorySelectionState extends CategoryPageState {
+class CategorySelected extends CategoryState {
   final int selectedId;
-  const CategorySelectionState(this.selectedId);
-  @override List<Object> get props => [selectedId];
+  const CategorySelected(this.selectedId);
+  @override
+  List<Object> get props => [selectedId];
 }
-
-class CategoriesError extends CategoryPageState {
+class CategoriesError extends CategoryState {
   final String message;
   const CategoriesError(this.message);
-  @override List<Object> get props => [message];
+  @override
+  List<Object> get props => [message];
 }

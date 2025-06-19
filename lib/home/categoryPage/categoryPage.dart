@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'category_page_bloc.dart';
-import 'package:hp_app/repository/categoryRepository.dart';
 import 'category_page_event.dart';
 import 'category_page_state.dart';
+import 'package:hp_app/repository/categoryRepository.dart';
+import 'package:hp_app/models/categoryModel.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({Key? key}) : super(key: key);
@@ -11,13 +12,17 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CategoryPageBloc(repository: CategoryRepository())..add(LoadCategories()),
+      create: (_) {
+        final bloc = CategoryPageBloc(repository: CategoryRepository());
+        bloc.add(LoadCategories());
+        return bloc;
+      },
       child: Scaffold(
-        appBar: AppBar(title: Text('Kategorien')),
-        body: BlocBuilder<CategoryPageBloc, CategoryPageState>(
+        appBar: AppBar(title: const Text('Kategorien')),
+        body: BlocBuilder<CategoryPageBloc, CategoryState>(
           builder: (context, state) {
             if (state is CategoriesLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is CategoriesLoaded) {
               return ListView.builder(
                 itemCount: state.categories.length,
@@ -32,7 +37,7 @@ class CategoryPage extends StatelessWidget {
             } else if (state is CategoriesError) {
               return Center(child: Text('Fehler: \${state.message}'));
             }
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           },
         ),
       ),

@@ -1,14 +1,15 @@
 import 'package:equatable/equatable.dart';
 
-abstract class CategoryPageEvent extends Equatable {
-  const CategoryPageEvent();
-  @override List<Object> get props => [];
+abstract class CategoryEvent extends Equatable {
+  const CategoryEvent();
+  @override
+  List<Object> get props => [];
 }
 
-class LoadCategories extends CategoryPageEvent {}
-
-class SelectCategory extends CategoryPageEvent {
+class LoadCategories extends CategoryEvent {}
+class SelectCategory extends CategoryEvent {
   final int categoryId;
   const SelectCategory(this.categoryId);
-  @override List<Object> get props => [categoryId];
+  @override
+  List<Object> get props => [categoryId];
 }
