@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../repository/getQuestion.dart';
 import 'category_page_bloc.dart';
 import 'category_page_event.dart';
 import 'category_page_state.dart';
 import 'package:hp_app/repository/categoryRepository.dart';
-import 'package:hp_app/models/categoryModel.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class CategoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) {
-        final bloc = CategoryPageBloc(repository: CategoryRepository());
+        final bloc = CategoryPageBloc(repository: CategoryRepository(), questionRepository: GetQuestionRepository());
         bloc.add(LoadCategories());
         return bloc;
       },
@@ -34,6 +34,9 @@ class CategoryPage extends StatelessWidget {
                   );
                 },
               );
+            } else if(state is CategorySelected){
+              return Center(child: Text('${state.question[0].answer2}'),);
+
             } else if (state is CategoriesError) {
               return Center(child: Text('Fehler: \${state.message}'));
             }
