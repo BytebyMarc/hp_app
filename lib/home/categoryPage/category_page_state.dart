@@ -18,7 +18,7 @@ class CategoriesLoaded extends CategoryState {
   List<Object> get props => [categories];
 }
 class CategorySelected extends CategoryState {
-  final List<QuestionModel> question;
+  final QuestionModel question;
   const CategorySelected(this.question);
   @override
   List<Object> get props => [question];

@@ -4,9 +4,9 @@ import 'package:hp_app/repository/dbConnection.dart';
 /// Repository for reading a prepopulated categories database (read-only).
 class GetQuestionRepository {
   /// Liest alle Einträge aus der Tabelle 'categories'.
-  Future<List<QuestionModel>> fetchQuestion({int? idQuestion}) async {
+  Future<QuestionModel> fetchQuestion({int? idQuestion}) async {
     final db = await DbConnection.openDb();
-    final maps = await db.query(
+    final result = await db.query(
       'question',
       columns: [
         'ID_question AS id',
@@ -25,6 +25,6 @@ class GetQuestionRepository {
       where: 'ID_question = ?',
       whereArgs:   [5],
     );
-    return maps.map((m) => QuestionModel.fromMap(m)).toList();
+    return QuestionModel.fromResult(result.first);
   }
 }

@@ -28,7 +28,7 @@ class QuestionModel {
 
   });
 
-  factory QuestionModel.fromMap(Map<String, dynamic> map) {
+  factory QuestionModel.fromResult(map) {
     return QuestionModel(
       id: map['id'] as int,
       activ: map['activ'] as int,

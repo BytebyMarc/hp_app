@@ -15,3 +15,9 @@ class SelectCategory extends CategoryEvent {
   @override
   List<Object> get props => [categoryId];
 }
+
+
+class Answer extends CategoryEvent{
+
+
+}

@@ -12,6 +12,7 @@ class CategoryPageBloc extends Bloc<CategoryEvent, CategoryState> {
   CategoryPageBloc({required this.repository, required this.questionRepository}) : super(CategoriesLoading()) {
     on<LoadCategories>(_onLoadCategories);
     on<SelectCategory>(_onSelectCategory);
+    on<Answer>(_onAnswerTap);
   }
 
   Future<void> _onLoadCategories(LoadCategories event, Emitter<CategoryState> emit) async {
@@ -36,4 +37,11 @@ class CategoryPageBloc extends Bloc<CategoryEvent, CategoryState> {
 
    // emit(CategorySelected(event.categoryId));
   }
+
+  Future <void> _onAnswerTap(Answer event, Emitter<CategoryState> emit) async{
+
+
+  }
+
+
 }
