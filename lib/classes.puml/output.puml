@@ -1,0 +1,456 @@
+@startuml
+class BurgerMenu {
+---
+build(): Widget
+}
+StatelessWidget <|-- BurgerMenu
+class _AppDrawer {
+---
+build(): Widget
+}
+StatelessWidget <|-- _AppDrawer
+class CategoryPage {
+---
+build(): Widget
+}
+StatelessWidget <|-- CategoryPage
+class CategoryPageBloc {
+---
+repository: CategoryRepository
+questionRepository: GetQuestionRepository
+-_onLoadCategories(): void
+-_onSelectCategory(): void
+-_onAnswerTap(): void
+-_onNextQuestion(): void
+}
+Bloc <|-- CategoryPageBloc
+CategoryPageBloc ..> CategoryRepository
+CategoryPageBloc ..> GetQuestionRepository
+abstract class CategoryEvent {
+---
+props(): Object[0..*]
+}
+Equatable <|-- CategoryEvent
+class LoadCategories {
+---
+}
+CategoryEvent <|-- LoadCategories
+class SelectCategory {
+---
+categoryId: int
+props(): Object[0..*]
+}
+CategoryEvent <|-- SelectCategory
+class AnswerQuestion {
+---
+selectedIndex: int
+}
+CategoryEvent <|-- AnswerQuestion
+class NextQuestion {
+---
+}
+CategoryEvent <|-- NextQuestion
+abstract class CategoryState {
+---
+props(): Object?[0..*]
+}
+Equatable <|-- CategoryState
+class CategoriesLoading {
+---
+}
+CategoryState <|-- CategoriesLoading
+class CategoriesLoaded {
+---
+categories: List<Category>
+props(): Object[0..*]
+}
+CategoryState <|-- CategoriesLoaded
+class CategorySelected {
+---
+question: QuestionModel
+selectedAnswerIndex: int?
+isAnswered: bool
+props(): Object?[0..*]
+copyWith(): CategorySelected
+}
+CategoryState <|-- CategorySelected
+CategorySelected ..> QuestionModel
+class CategoriesError {
+---
+message: String
+props(): Object[0..*]
+}
+CategoryState <|-- CategoriesError
+class FalseQuestion {
+---
+build(): Widget
+}
+StatelessWidget <|-- FalseQuestion
+class FalseQuestionBloc {
+---
+questionRepository: GetQuestionRepository
+getFalseQuestionList: GetFalseQuestionList
+currentQuestionNumber: int
+-_onSelect(): void
+-_onToggle(): void
+-_onEvaluate(): void
+-_onNext(): void
+}
+Bloc <|-- FalseQuestionBloc
+FalseQuestionBloc ..> GetQuestionRepository
+FalseQuestionBloc ..> GetFalseQuestionList
+abstract class FalseQuestionEvent {
+---
+}
+class SelectFalseQuestion {
+---
+}
+FalseQuestionEvent <|-- SelectFalseQuestion
+class ToggleAnswer {
+---
+index: int
+}
+FalseQuestionEvent <|-- ToggleAnswer
+class EvaluateAnswers {
+---
+}
+FalseQuestionEvent <|-- EvaluateAnswers
+class NextQuestion {
+---
+}
+FalseQuestionEvent <|-- NextQuestion
+abstract class FalseQuestionState {
+---
+}
+class FalseQuestionLoading {
+---
+}
+FalseQuestionState <|-- FalseQuestionLoading
+class FalseQuestionSelected {
+---
+question: QuestionModel
+selectedAnswerIndices: List<int>
+isEvaluated: bool
+isCorrect: bool
+rightSequence: List<int>
+liste: List<dynamic>
+numberQuestion: int
+copyWith(): FalseQuestionSelected
+}
+FalseQuestionState <|-- FalseQuestionSelected
+FalseQuestionSelected ..> QuestionModel
+class FalseQuestionError {
+---
+message: String
+}
+FalseQuestionState <|-- FalseQuestionError
+class HomeScreen {
+---
+build(): Widget
+}
+StatelessWidget <|-- HomeScreen
+class _HomeMenuList {
+---
+-entries: List<_Entry>
+build(): Widget
+}
+StatelessWidget <|-- _HomeMenuList
+class _Entry {
+---
+item: HomeMenuItem
+title: String
+icon: IconData
+}
+_Entry ..> HomeMenuItem
+_Entry ..> IconData
+class HomeBloc {
+---
+}
+Bloc <|-- HomeBloc
+class HomeEvent {
+---
+}
+class HomeState {
+---
+}
+class HomeInitial {
+---
+}
+HomeState <|-- HomeInitial
+class IndexCards {
+---
+build(): Widget
+}
+StatelessWidget <|-- IndexCards
+class OriginalExamen {
+---
+build(): Widget
+}
+StatelessWidget <|-- OriginalExamen
+class RandomQuestion {
+---
+build(): Widget
+}
+StatelessWidget <|-- RandomQuestion
+class RandomQuestionBloc {
+---
+questionRepository: GetQuestionRepository
+-_onSelect(): void
+-_onToggle(): void
+-_onEvaluate(): void
+-_onNext(): void
+}
+Bloc <|-- RandomQuestionBloc
+RandomQuestionBloc ..> GetQuestionRepository
+abstract class RandomQuestionEvent {
+---
+}
+class SelectRandomQuestion {
+---
+}
+RandomQuestionEvent <|-- SelectRandomQuestion
+class ToggleAnswer {
+---
+index: int
+}
+RandomQuestionEvent <|-- ToggleAnswer
+class EvaluateAnswers {
+---
+}
+RandomQuestionEvent <|-- EvaluateAnswers
+class NextQuestion {
+---
+}
+RandomQuestionEvent <|-- NextQuestion
+abstract class RandomQuestionState {
+---
+}
+class RandomQuestionLoading {
+---
+}
+RandomQuestionState <|-- RandomQuestionLoading
+class RandomQuestionSelected {
+---
+question: QuestionModel
+selectedAnswerIndices: List<int>
+isEvaluated: bool
+isCorrect: bool
+rightSequence: List<int>
+copyWith(): RandomQuestionSelected
+}
+RandomQuestionState <|-- RandomQuestionSelected
+RandomQuestionSelected ..> QuestionModel
+class RandomQuestionError {
+---
+message: String
+}
+RandomQuestionState <|-- RandomQuestionError
+class SavedQuestions {
+---
+build(): Widget
+}
+StatelessWidget <|-- SavedQuestions
+class SearchQuestion {
+---
+build(): Widget
+}
+StatelessWidget <|-- SearchQuestion
+class VirtualLearnBook {
+---
+build(): Widget
+}
+StatelessWidget <|-- VirtualLearnBook
+class Lexikon {
+---
+build(): Widget
+}
+StatelessWidget <|-- Lexikon
+class LexikonBloc {
+---
+-allentries: List<LexikonEntry>
+-_onLoadLexikon(): void
+-_onSearch(): void
+}
+Bloc <|-- LexikonBloc
+class LexikonEvent {
+---
+}
+class LoadLexikon {
+---
+}
+LexikonEvent <|-- LoadLexikon
+class SearchLexikon {
+---
+query: String
+}
+LexikonEvent <|-- SearchLexikon
+class LexikonState {
+---
+}
+class LexikonInitial {
+---
+}
+LexikonState <|-- LexikonInitial
+class LexikonLoading {
+---
+}
+LexikonState <|-- LexikonLoading
+class LexikonLoaded {
+---
+entries: List<LexikonEntry>
+}
+LexikonState <|-- LexikonLoaded
+class LexikonError {
+---
+message: String
+}
+LexikonState <|-- LexikonError
+class MyApp {
+---
+build(): Widget
+}
+StatelessWidget <|-- MyApp
+class Category {
+---
+id: int
+name: String
+}
+class FalseQuestionListModel {
+---
+questionID: int
+conditionAnswer: int
+toString(): String
+}
+class LexikonEntry {
+---
+term: String
+description: String
+testEntries: List<LexikonEntry>
+toJson(): Map<String, dynamic
+}
+class QuestionModel {
+---
+id: int
+activ: int
+category: int
+question: String
+answer1: String
+answer2: String
+answer3: String
+answer4: String
+answer5: String
+right: int
+month: int
+year: int
+answers: List<String>
+rightSequence: List<int>
+}
+class NavigationCubit {
+---
+selectMenu(): void
+}
+Cubit <|-- NavigationCubit
+class NavigationHome {
+---
+selectHomeMenu(): void
+}
+Cubit <|-- NavigationHome
+class CategoryRepository {
+---
+fetchCategories(): Category[0..*]
+}
+class DbConnection {
+---
+-db: Database?
+openDb(): Database
+closeDb(): void
+}
+DbConnection ..> Database
+class GetFalseQuestionList {
+---
+fetchFalseAnswer(): FalseQuestionListModel[0..*]
+}
+class GetQuestionRepository {
+---
+random: null
+fetchQuestion(): QuestionModel
+}
+class SetAnswerRepository {
+---
+id: int
+answer: bool
+save(): void
+}
+class AppColors {
+---
+primary: Color
+secondary: Color
+accent: Color
+backgroundLight: Color
+backgroundDark: Color
+surfaceLight: Color
+surfaceDark: Color
+textLight: Color
+textDark: Color
+}
+AppColors ..> Color
+class AppTheme {
+---
+lightTheme: ThemeData
+darkTheme: ThemeData
+}
+AppTheme ..> ThemeData
+class Settings {
+---
+build(): Widget
+}
+StatelessWidget <|-- Settings
+class ThemeBloc {
+---
+-_onToggle(): void
+-_onSystem(): void
+}
+Bloc <|-- ThemeBloc
+class ThemeEvent {
+---
+props(): Object[0..*]
+}
+Equatable <|-- ThemeEvent
+class ToggleThemeEvent {
+---
+}
+ThemeEvent <|-- ToggleThemeEvent
+class SystemThemeEvent {
+---
+}
+ThemeEvent <|-- SystemThemeEvent
+class ThemeState {
+---
+themeMode: ThemeMode
+props(): Object?[0..*]
+copyWith(): ThemeState
+}
+Equatable <|-- ThemeState
+ThemeState ..> ThemeMode
+class AnswerList {
+---
+build(): Widget
+}
+StatelessWidget <|-- AnswerList
+class AnswerOption {
+---
+index: int
+build(): Widget
+}
+StatelessWidget <|-- AnswerOption
+class ControlButton {
+---
+build(): Widget
+}
+StatelessWidget <|-- ControlButton
+class QuestionText {
+---
+build(): Widget
+}
+StatelessWidget <|-- QuestionText
+@enduml

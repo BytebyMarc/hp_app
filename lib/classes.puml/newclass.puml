@@ -1,0 +1,449 @@
+@startuml
+' Leserichtung & etwas Styling
+left to right direction
+skinparam shadowing false
+skinparam roundCorner 5
+skinparam classAttributeIconSize 0
+
+' -- UI-Komponenten
+package "UI – Widgets" {
+  class BurgerMenu {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- BurgerMenu
+
+  class _AppDrawer {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- _AppDrawer
+
+  class CategoryPage {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- CategoryPage
+
+  class FalseQuestion {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- FalseQuestion
+
+  class HomeScreen {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- HomeScreen
+
+  class IndexCards {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- IndexCards
+
+  class OriginalExamen {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- OriginalExamen
+
+  class RandomQuestion {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- RandomQuestion
+
+  class SavedQuestions {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- SavedQuestions
+
+  class SearchQuestion {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- SearchQuestion
+
+  class VirtualLearnBook {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- VirtualLearnBook
+
+  class Lexikon {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- Lexikon
+
+  class Settings {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- Settings
+
+  class AnswerList {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- AnswerList
+
+  class AnswerOption {
+    --
+    +index: int
+    +build(): Widget
+  }
+  StatelessWidget <|-- AnswerOption
+
+  class ControlButton {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- ControlButton
+
+  class QuestionText {
+    --
+    +build(): Widget
+  }
+  StatelessWidget <|-- QuestionText
+
+  class _HomeMenuList {
+    --
+    -entries: List<_Entry>
+    +build(): Widget
+  }
+  StatelessWidget <|-- _HomeMenuList
+
+  class _Entry {
+    --
+    +item: HomeMenuItem
+    +title: String
+    +icon: IconData
+  }
+  _Entry ..> HomeMenuItem
+  _Entry ..> IconData
+}
+
+' -- BLoCs
+package "Bloc – Logik" {
+  class CategoryPageBloc {
+    --
+    +repository: CategoryRepository
+    +questionRepository: GetQuestionRepository
+    -_onLoadCategories(): void
+    -_onSelectCategory(): void
+    -_onAnswerTap(): void
+    -_onNextQuestion(): void
+  }
+  Bloc <|-- CategoryPageBloc
+  CategoryPageBloc ..> CategoryRepository
+  CategoryPageBloc ..> GetQuestionRepository
+
+  class FalseQuestionBloc {
+    --
+    +questionRepository: GetQuestionRepository
+    +getFalseQuestionList: GetFalseQuestionList
+    +currentQuestionNumber: int
+    -_onSelect(): void
+    -_onToggle(): void
+    -_onEvaluate(): void
+    -_onNext(): void
+  }
+  Bloc <|-- FalseQuestionBloc
+  FalseQuestionBloc ..> GetQuestionRepository
+  FalseQuestionBloc ..> GetFalseQuestionList
+
+  class RandomQuestionBloc {
+    --
+    +questionRepository: GetQuestionRepository
+    -_onSelect(): void
+    -_onToggle(): void
+    -_onEvaluate(): void
+    -_onNext(): void
+  }
+  Bloc <|-- RandomQuestionBloc
+  RandomQuestionBloc ..> GetQuestionRepository
+
+  class HomeBloc {
+    --
+  }
+  Bloc <|-- HomeBloc
+
+  class LexikonBloc {
+    --
+    +allentries: List<LexikonEntry>
+    -_onLoadLexikon(): void
+    -_onSearch(): void
+  }
+  Bloc <|-- LexikonBloc
+
+  class ThemeBloc {
+    --
+    -_onToggle(): void
+    -_onSystem(): void
+  }
+  Bloc <|-- ThemeBloc
+
+  class NavigationCubit {
+    --
+    +selectMenu(): void
+  }
+  Cubit <|-- NavigationCubit
+
+  class NavigationHome {
+    --
+    +selectHomeMenu(): void
+  }
+  Cubit <|-- NavigationHome
+}
+
+' -- Events & States für Category
+package "Category Events" {
+  abstract class CategoryEvent {
+    --
+    +props(): Object[0..*]
+  }
+  Equatable <|-- CategoryEvent
+
+  class LoadCategories {}
+  CategoryEvent <|-- LoadCategories
+
+  class SelectCategory {
+    --
+    +categoryId: int
+    +props(): Object[0..*]
+  }
+  CategoryEvent <|-- SelectCategory
+
+  class AnswerQuestion {
+    --
+    +selectedIndex: int
+  }
+  CategoryEvent <|-- AnswerQuestion
+
+  class NextQuestion_Cat
+  CategoryEvent <|-- NextQuestion_Cat
+}
+
+package "Category States" {
+  abstract class CategoryState {
+    --
+    +props(): Object?[0..*]
+  }
+  Equatable <|-- CategoryState
+
+  class CategoriesLoading {}
+  CategoryState <|-- CategoriesLoading
+
+  class CategoriesLoaded {
+    --
+    +categories: List<Category>
+    +props(): Object[0..*]
+  }
+  CategoryState <|-- CategoriesLoaded
+
+  class CategorySelected {
+    --
+    +question: QuestionModel
+    +selectedAnswerIndex: int?
+    +isAnswered: bool
+    +props(): Object?[0..*]
+    +copyWith(): CategorySelected
+  }
+  CategoryState <|-- CategorySelected
+  CategorySelected ..> QuestionModel
+
+  class CategoriesError {
+    --
+    +message: String
+    +props(): Object[0..*]
+  }
+  CategoryState <|-- CategoriesError
+}
+
+' -- Events & States für FalseQuestion
+package "FalseQuestion Events" {
+  abstract class FalseQuestionEvent { }
+  class SelectFalseQuestion {}
+  FalseQuestionEvent <|-- SelectFalseQuestion
+
+  class ToggleAnswer_FQ {
+    --
+    +index: int
+  }
+  FalseQuestionEvent <|-- ToggleAnswer_FQ
+
+  class EvaluateAnswers_FQ {}
+  FalseQuestionEvent <|-- EvaluateAnswers_FQ
+
+  class NextQuestion_FQ {}
+  FalseQuestionEvent <|-- NextQuestion_FQ
+}
+
+package "FalseQuestion States" {
+  abstract class FalseQuestionState { }
+  class FalseQuestionLoading { }
+  FalseQuestionState <|-- FalseQuestionLoading
+
+  class FalseQuestionSelected {
+    --
+    +question: QuestionModel
+    +selectedAnswerIndices: List<int>
+    +isEvaluated: bool
+    +isCorrect: bool
+    +rightSequence: List<int>
+    +liste: List<dynamic>
+    +numberQuestion: int
+    +copyWith(): FalseQuestionSelected
+  }
+  FalseQuestionState <|-- FalseQuestionSelected
+  FalseQuestionSelected ..> QuestionModel
+
+  class FalseQuestionError {
+    --
+    +message: String
+  }
+  FalseQuestionState <|-- FalseQuestionError
+}
+
+' -- Events & States für RandomQuestion
+package "RandomQuestion Events" {
+  abstract class RandomQuestionEvent { }
+  class SelectRandomQuestion { }
+  RandomQuestionEvent <|-- SelectRandomQuestion
+
+  class ToggleAnswer_RQ {
+    --
+    +index: int
+  }
+  RandomQuestionEvent <|-- ToggleAnswer_RQ
+
+  class EvaluateAnswers_RQ { }
+  RandomQuestionEvent <|-- EvaluateAnswers_RQ
+
+  class NextQuestion_RQ {  }
+  RandomQuestionEvent <|-- NextQuestion_RQ
+}
+
+package "RandomQuestion States" {
+  abstract class RandomQuestionState {  }
+  class RandomQuestionLoading {  }
+  RandomQuestionState <|-- RandomQuestionLoading
+
+  class RandomQuestionSelected {
+    --
+    +question: QuestionModel
+    +selectedAnswerIndices: List<int>
+    +isEvaluated: bool
+    +isCorrect: bool
+    +rightSequence: List<int>
+    +copyWith(): RandomQuestionSelected
+  }
+  RandomQuestionState <|-- RandomQuestionSelected
+  RandomQuestionSelected ..> QuestionModel
+
+  class RandomQuestionError {
+    --
+    +message: String
+  }
+  RandomQuestionState <|-- RandomQuestionError
+}
+
+' -- Models & Repositories
+package "Models & Repos" {
+  class Category {
+    --
+    +id: int
+    +name: String
+  }
+
+  class QuestionModel {
+    --
+    +id: int
+    +activ: int
+    +category: int
+    +question: String
+    +answer1: String
+    +answer2: String
+    +answer3: String
+    +answer4: String
+    +answer5: String
+    +right: int
+    +month: int
+    +year: int
+    +answers: List<String>
+    +rightSequence: List<int>
+  }
+
+  class FalseQuestionListModel {
+    --
+    +questionID: int
+    +conditionAnswer: int
+    +toString(): String
+  }
+
+  class LexikonEntry {
+    --
+    +term: String
+    +description: String
+    +testEntries: List<LexikonEntry>
+    +toJson(): Map<String, dynamic>
+  }
+
+  class CategoryRepository {
+    --
+    +fetchCategories(): Category[0..*]
+  }
+
+  class GetFalseQuestionList {
+    --
+    +fetchFalseAnswer(): FalseQuestionListModel[0..*]
+  }
+
+  class GetQuestionRepository {
+    --
+    +random: null
+    +fetchQuestion(): QuestionModel
+  }
+
+  class SetAnswerRepository {
+    --
+    +id: int
+    +answer: bool
+    +save(): void
+  }
+
+  class DbConnection {
+    --
+    -db: Database?
+    +openDb(): Database
+    +closeDb(): void
+  }
+  DbConnection ..> Database
+
+  class AppColors {
+    --
+    +primary: Color
+    +secondary: Color
+    +accent: Color
+    +backgroundLight: Color
+    +backgroundDark: Color
+    +surfaceLight: Color
+    +surfaceDark: Color
+    +textLight: Color
+    +textDark: Color
+  }
+  AppColors ..> Color
+
+  class AppTheme {
+    --
+    +lightTheme: ThemeData
+    +darkTheme: ThemeData
+  }
+  AppTheme ..> ThemeData
+}
+
+@enduml
