@@ -21,7 +21,7 @@ class FalseQuestion extends StatelessWidget {
           questionRepository: GetQuestionRepository(),
           getFalseQuestionList: GetFalseQuestionList(),
         );
-        bloc.add(SelectFalseQuestion(numberQuestion: 1));
+        bloc.add(SelectFalseQuestion());
         return bloc;
       },
       child: Scaffold(

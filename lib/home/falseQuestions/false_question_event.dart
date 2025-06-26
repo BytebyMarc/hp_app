@@ -1,8 +1,7 @@
 abstract class FalseQuestionEvent {}
 
 class SelectFalseQuestion extends FalseQuestionEvent {
-  final int numberQuestion;
-  SelectFalseQuestion({required this.numberQuestion});
+  SelectFalseQuestion();
 }
 
 class ToggleAnswer extends FalseQuestionEvent {

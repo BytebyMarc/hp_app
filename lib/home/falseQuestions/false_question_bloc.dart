@@ -6,12 +6,10 @@ import 'package:hp_app/repository/setAnswerRepository.dart';
 import 'package:hp_app/home/falseQuestions/false_question_event.dart';
 import 'package:hp_app/home/falseQuestions/false_question_state.dart';
 
-
 class FalseQuestionBloc extends Bloc<FalseQuestionEvent, FalseQuestionState>  {
   final GetQuestionRepository questionRepository;
   final GetFalseQuestionList getFalseQuestionList;
   int currentQuestionNumber = 1;
-
 
   FalseQuestionBloc({ required this.questionRepository, required this.getFalseQuestionList})
       : super(FalseQuestionLoading()) {
@@ -25,9 +23,9 @@ class FalseQuestionBloc extends Bloc<FalseQuestionEvent, FalseQuestionState>  {
     emit(FalseQuestionLoading());
     try {
       final liste = await getFalseQuestionList.fetchFalseAnswer();
-      debugPrint(liste.toString());
+      //debugPrint(currentQuestionNumber as String?);
         final q = await questionRepository.fetchQuestion(
-            idQuestion: liste[0].question_ID);
+            idQuestion: liste[currentQuestionNumber].question_ID);
         emit(FalseQuestionSelected(
             question: q,
             rightSequence: q.rightSequence,
@@ -70,6 +68,6 @@ class FalseQuestionBloc extends Bloc<FalseQuestionEvent, FalseQuestionState>  {
 
   void _onNext(NextQuestion evt, Emitter emit) {
     currentQuestionNumber = currentQuestionNumber +1 ;
-        add(SelectFalseQuestion(numberQuestion: 1));
+        add(SelectFalseQuestion());
   }
 }
