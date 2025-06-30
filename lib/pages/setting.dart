@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'theme_bloc.dart';
-import 'theme_event.dart';
-import 'theme_state.dart';
+import '../bloc/blocs/settings_bloc.dart';
+import '../bloc/events/setting_event.dart';
+import '../bloc/states/setting_state.dart';
 
 class Settings extends StatelessWidget {
   const Settings({super.key});
@@ -12,7 +12,7 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Einstellungen')),
-      body: BlocBuilder<ThemeBloc, ThemeState>(
+      body: BlocBuilder<SettingBloc, SettingState>(
         builder: (context, state) {
           final isDark = state.themeMode == ThemeMode.dark;
           return ListView(
@@ -22,7 +22,7 @@ class Settings extends StatelessWidget {
                 subtitle: Text('System-Einstellung verwenden'),
                 value: isDark,
                 onChanged: (_) =>
-                    context.read<ThemeBloc>().add(ToggleThemeEvent()),
+                    context.read<SettingBloc>().add(ToggleThemeEvent()),
               ),
               const Divider(),
               // Weitere Einstellungen hier...

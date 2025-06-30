@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/repository/categoryRepository.dart';
 import 'package:hp_app/repository/getQuestion.dart';
-import 'category_page_event.dart';
-import 'category_page_state.dart';
+import '../events/category_page_event.dart';
+import '../states/category_page_state.dart';
 
 class CategoryPageBloc extends Bloc<CategoryEvent, CategoryState> {
   final CategoryRepository repository;

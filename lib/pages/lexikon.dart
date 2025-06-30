@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'lexikon_bloc.dart';
-import 'lexikon_event.dart';
-import 'lexikon_state.dart';
+import '../bloc/blocs/lexikon_bloc.dart';
+import '../bloc/events/lexikon_event.dart';
+import '../bloc/states/lexikon_state.dart';
 
 class Lexikon extends StatelessWidget {
   const Lexikon({super.key});

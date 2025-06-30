@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/home/categoryPage/categoryPage.dart';
-import 'package:hp_app/home/falseQuestions/falseQuestion.dart';
-import 'package:hp_app/home/indexCards/indexCards.dart';
-import 'package:hp_app/home/originalExamen/originalExamen.dart';
-import 'package:hp_app/home/randomQuestion/randomQuestion.dart';
-import 'package:hp_app/home/savedQuestions/savedQuestions.dart';
-import 'package:hp_app/home/searchQuestion/searchQuestion.dart';
-import 'package:hp_app/home/vitualLearnBook/vitualLearnBook.dart';
-import 'package:hp_app/navigation_cubit.dart';
+import 'package:hp_app/pages/categoryPage.dart';
+import 'package:hp_app/pages/falseQuestion.dart';
+import 'package:hp_app/pages/indexCards.dart';
+import 'package:hp_app/pages/originalExamen.dart';
+import 'package:hp_app/pages/randomQuestion.dart';
+import 'package:hp_app/pages/savedQuestions.dart';
+import 'package:hp_app/pages/searchQuestion.dart';
+import 'package:hp_app/pages/vitualLearnBook.dart';
+import 'package:hp_app/widgets/navigation/navigation_cubit.dart';
 
 
 /// Steuert das Untermenü auf dem Home-Screen

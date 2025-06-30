@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/repository/getFalseQuestionsList.dart';
 import 'package:hp_app/repository/getQuestion.dart';
 import 'package:hp_app/repository/setAnswerRepository.dart';
-import 'package:hp_app/home/falseQuestions/false_question_event.dart';
-import 'package:hp_app/home/falseQuestions/false_question_state.dart';
+import 'package:hp_app/bloc/events/false_question_event.dart';
+import 'package:hp_app/bloc/states/false_question_state.dart';
 
 class FalseQuestionBloc extends Bloc<FalseQuestionEvent, FalseQuestionState>  {
   final GetQuestionRepository questionRepository;

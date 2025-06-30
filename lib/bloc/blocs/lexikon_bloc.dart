@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 
-import '../models/lexikon_entry.dart';
-import 'lexikon_event.dart';
-import 'lexikon_state.dart';
+import '../../models/lexikon_entry.dart';
+import '../events/lexikon_event.dart';
+import '../states/lexikon_state.dart';
 
 class LexikonBloc extends Bloc<LexikonEvent, LexikonState> {
   final List<LexikonEntry> _allentries = [];

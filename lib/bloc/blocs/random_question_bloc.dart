@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/repository/getQuestion.dart';
 import 'package:hp_app/repository/setAnswerRepository.dart';
-import 'random_question_state.dart';
-import 'random_question_event.dart';
+import '../states/random_question_state.dart';
+import '../events/random_question_event.dart';
 
 class RandomQuestionBloc extends Bloc<RandomQuestionEvent, RandomQuestionState> {
   final GetQuestionRepository questionRepository;

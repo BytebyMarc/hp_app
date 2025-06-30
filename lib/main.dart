@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/BurgerMenu/BurgerMenu.dart';
-import 'lexikon/lexikon_event.dart';
-import 'navigation_cubit.dart';
-import 'lexikon/lexikon_bloc.dart';
-import 'settings/appTheme.dart';
-import 'package:hp_app/settings/theme_bloc.dart';
-import 'settings/theme_state.dart';
+import 'package:hp_app/widgets/navigation/BurgerMenu.dart';
+import 'bloc/events/lexikon_event.dart';
+import 'widgets/navigation/navigation_cubit.dart';
+import 'bloc/blocs/lexikon_bloc.dart';
+import 'theme/appTheme.dart';
+import 'package:hp_app/bloc/blocs/settings_bloc.dart';
+import 'bloc/states/setting_state.dart';
 
 void main() {
 
@@ -14,7 +14,7 @@ void main() {
   runApp(BlocProvider(
     create: (_) => NavigationCubit(),
     child: MultiBlocProvider(providers: [
-      BlocProvider(create: (_) => ThemeBloc()),
+      BlocProvider(create: (_) => SettingBloc()),
       BlocProvider(create: (_) => NavigationCubit()),
       BlocProvider(create: (_) => NavigationHome()),
       BlocProvider(create: (_) => LexikonBloc()..add(LoadLexikon())),
@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeBloc, ThemeState>(
+    return BlocBuilder<SettingBloc, SettingState>(
       builder: (context, themeState) {
         return MaterialApp(
           title: 'Hppsy Prüfungstrainer',

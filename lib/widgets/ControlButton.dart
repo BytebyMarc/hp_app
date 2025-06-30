@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../home/falseQuestions/false_question_bloc.dart';
-import '../home/falseQuestions/false_question_event.dart';
-import '../home/falseQuestions/false_question_state.dart';
+import '../bloc/blocs/false_question_bloc.dart';
+import '../bloc/events/false_question_event.dart';
+import '../bloc/states/false_question_state.dart';
 
 class ControlButton extends StatelessWidget {
   const ControlButton({Key? key}) : super(key: key);

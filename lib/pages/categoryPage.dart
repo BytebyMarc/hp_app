@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../repository/getQuestion.dart';
-import 'category_page_bloc.dart';
-import 'category_page_event.dart';
-import 'category_page_state.dart';
+import '../repository/getQuestion.dart';
+import '../bloc/blocs/category_page_bloc.dart';
+import '../bloc/events/category_page_event.dart';
+import '../bloc/states/category_page_state.dart';
 import 'package:hp_app/repository/categoryRepository.dart';
 
 class CategoryPage extends StatelessWidget {

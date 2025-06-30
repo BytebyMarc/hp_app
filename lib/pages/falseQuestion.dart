@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/repository/getFalseQuestionsList.dart';
-import '../../repository/getQuestion.dart';
-import 'package:hp_app/home/falseQuestions/false_question_bloc.dart';
-import 'package:hp_app/home/falseQuestions/false_question_state.dart';
-import 'package:hp_app/home/falseQuestions/false_question_event.dart';
+import '../repository/getQuestion.dart';
+import 'package:hp_app/bloc/blocs/false_question_bloc.dart';
+import 'package:hp_app/bloc/states/false_question_state.dart';
+import 'package:hp_app/bloc/events/false_question_event.dart';
 
-import '../../widgets/AnswerList.dart';
-import '../../widgets/ControlButton.dart';
-import '../../widgets/QuestionText.dart';
+import '../widgets/AnswerList.dart';
+import '../widgets/ControlButton.dart';
+import '../widgets/QuestionText.dart';
 
 class FalseQuestion extends StatelessWidget {
   const FalseQuestion({Key? key}) : super(key: key);
