@@ -5,7 +5,7 @@ enum MenuItem {
   proVersion,
   shop,
   lexikon,
-  registieren,
+  registrieren,
   login,
   settings,
   datenschutz,

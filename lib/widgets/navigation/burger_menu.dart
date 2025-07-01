@@ -32,8 +32,8 @@ class BurgerMenu extends StatelessWidget {
               return const Center(child: Text('Datenschutz'));
             case MenuItem.settings:
               return Settings();
-            case MenuItem.registieren:
-              return const Center(child: Text('Registieren'));
+            case MenuItem.registrieren:
+              return const Center(child: Text('Registrieren'));
             case MenuItem.shop:
               return const Center(child: Text('Shop'));
             case MenuItem.facebook:
@@ -107,10 +107,10 @@ class _AppDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: const Icon(Icons.app_registration),
-            title: const Text('Registieren'),
-            selected: current == MenuItem.registieren,
+            title: const Text('Registrieren'),
+            selected: current == MenuItem.registrieren,
             onTap: () {
-              context.read<NavigationCubit>().selectMenu(MenuItem.registieren);
+              context.read<NavigationCubit>().selectMenu(MenuItem.registrieren);
               Navigator.pop(context);
             },
           ),
