@@ -1,58 +1,76 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/repository/getFalseQuestionsList.dart';
-import '../repository/getQuestion.dart';
+import '../bloc/events/question_event_base.dart';
+import '../bloc/states/question_state_base.dart';
 import 'package:hp_app/bloc/blocs/false_question_bloc.dart';
-import 'package:hp_app/bloc/states/false_question_state.dart';
-import 'package:hp_app/bloc/events/false_question_event.dart';
-
-import '../widgets/AnswerList.dart';
-import '../widgets/ControlButton.dart';
+import '../repository/getQuestion.dart';
 import '../widgets/QuestionText.dart';
+import '../widgets/answer_list.dart';
+import '../widgets/control_button.dart';
 
-class FalseQuestion extends StatelessWidget {
-  const FalseQuestion({Key? key}) : super(key: key);
+/// Seite für zufällige Mehrfachauswahl-Fragen
+/// Seite für zufällige Mehrfachauswahl-Fragen
+class FalseQuestionPage extends StatelessWidget {
+  const FalseQuestionPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) {
-        final bloc = FalseQuestionBloc(
-          questionRepository: GetQuestionRepository(),
-          getFalseQuestionList: GetFalseQuestionList(),
-        );
-        bloc.add(SelectFalseQuestion());
-        return bloc;
-      },
+    return BlocProvider<FalseQuestionBloc>(
+      create: (_) => FalseQuestionBloc(
+        falseListRepo: GetFalseQuestionList(),
+        questionRepo:  GetQuestionRepository(),
+      ),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Zufällige Fragen (Mehrfachauswahl)')),
-        body: BlocBuilder<FalseQuestionBloc, FalseQuestionState>(
+        appBar: AppBar(
+          title: const Text('Zufällige Fragen (Mehrfachauswahl)'),
+        ),
+        body: BlocBuilder<FalseQuestionBloc, QuestionState>(
           builder: (context, state) {
-            if (state is FalseQuestionLoading) {
+            if (state is QuestionLoading) {
               return const Center(child: CircularProgressIndicator());
+            } else if (state is QuestionError) {
+              return Center(child: Text('Fehler: \${state.message}'));
+            } else if (state is QuestionSelected) {
+              return SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    QuestionText(text: state.questionText),
+                    const SizedBox(height: 16),
+
+                    // Multi-Select: Liste der Antworten mit ausgewählten Indizes
+                    AnswerList(
+                      answers: state.answers,
+                      selectedIndices: state.selectedIndices,
+                      correctAnswerIndices: state.correctAnswerIndices,
+                      isEvaluated: state.isEvaluated,
+                      onTap: (index) {
+                        if (!state.isEvaluated) {
+                          context.read<FalseQuestionBloc>().add(SelectAnswer(index));
+                        }
+                      },
+                    ),
+                    const SizedBox(height: 24),
+
+                    // Steuer-Buttons: Evaluieren oder Nächste Frage
+                    ControlButton(
+                      isEvaluated: state.isEvaluated,
+                      isCorrect: state.isCorrect,
+                      onEvaluate: () => context.read<FalseQuestionBloc>().add(EvaluateAnswers()),
+                      onNext: () => context.read<FalseQuestionBloc>().add(NextQuestion()),
+                    ),
+
+                    const SizedBox(height: 50),
+                  ],
+                ),
+              );
             }
-            if (state is FalseQuestionError) {
-              return Center(child: Text('Fehler: ${state.message}'));
-            }
-            // Sobald wir im Selected-State sind, zeigen wir die Widgets
-            return SingleChildScrollView(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: const [
-                  QuestionText(),
-                  SizedBox(height: 16),
-                  AnswerList(),
-                  SizedBox(height: 24),
-                  ControlButton(),
-                  SizedBox(height: 50),
-                ],
-              ),
-            );
+            return const SizedBox.shrink();
           },
         ),
       ),
     );
   }
 }
-

@@ -21,8 +21,7 @@ class RandomQuestionBloc extends Bloc<RandomQuestionEvent, RandomQuestionState> 
     try {
       final q = await questionRepository.fetchQuestion();
       emit(RandomQuestionSelected(
-        question: q,
-        rightSequence: q.rightSequence,
+        question: q, rightSequence: [],
       ));
     } catch (e) {
       emit(RandomQuestionError(e.toString()));

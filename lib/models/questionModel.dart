@@ -11,8 +11,6 @@ class QuestionModel {
   final int right;
   final int month;
   final int year;
-  final List<String> answers;
-  final List<int> rightSequence;
 
   QuestionModel({
     required this.id,
@@ -27,18 +25,28 @@ class QuestionModel {
     required this.right,
     required this.month,
     required this.year,
-    required this.answers,
-    required this.rightSequence
+
   });
 
-  factory QuestionModel.fromResult(map) {
-    final List<String> answers = <String>[map['answer1'], map['answer2'], map['answer3'], map['answer4'], map['answer5']];
-    List<int> digits = map['right']
-        .toString()
-        .split('')               // ["1", "2", "3", "4", "5"]
-        .map((ch) => int.parse(ch))  // [1, 2, 3, 4, 5]
-        .toList();
+  List<String> get answers => [
+    answer1,
+    answer2,
+    answer3,
+    answer4,
+    answer5,
+  ];
 
+  List<int> get correctAnswerIndices => right
+      .toString()
+      .split('')
+      .map((ch) => int.parse(ch) - 1)
+      .toList();
+
+  bool isAnswerCorrect(int index) {
+    return correctAnswerIndices.contains(index);
+  }
+
+  factory QuestionModel.fromResult(Map<String, dynamic> map) {
     return QuestionModel(
       id: map['id'] as int,
       activ: map['activ'] as int,
@@ -48,12 +56,10 @@ class QuestionModel {
       answer2: map['answer2'] as String,
       answer3: map['answer3'] as String,
       answer4: map['answer4'] as String,
-      answer5: map['answer5']as String,
+      answer5: map['answer5'] as String,
       right: map['right'] as int,
       month: map['month'] as int,
       year: map['year'] as int,
-      answers: answers,
-      rightSequence: digits
     );
   }
 }

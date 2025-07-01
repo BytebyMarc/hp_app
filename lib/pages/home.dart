@@ -5,6 +5,7 @@ import 'package:hp_app/pages/falseQuestion.dart';
 import 'package:hp_app/pages/indexCards.dart';
 import 'package:hp_app/pages/originalExamen.dart';
 import 'package:hp_app/pages/randomQuestion.dart';
+import 'package:hp_app/pages/randomQuestion2.dart';
 import 'package:hp_app/pages/savedQuestions.dart';
 import 'package:hp_app/pages/searchQuestion.dart';
 import 'package:hp_app/pages/vitualLearnBook.dart';
@@ -29,7 +30,7 @@ class HomeScreen extends StatelessWidget {
           case HomeMenuItem.gemerkteFragen:
             return SavedQuestions();
           case HomeMenuItem.falschBeantwortete:
-            return FalseQuestion();
+            return FalseQuestionPage();
           case HomeMenuItem.frageSuche:
             return SearchQuestion();
           case HomeMenuItem.virtuellesLehrbuch:

@@ -1,4 +1,16 @@
-part of '../blocs/question_bloc_base.dart';
+import 'package:hp_app/bloc/blocs/question_bloc_base.dart';
 
-@immutable
-sealed class QuestionEvent {}
+
+abstract class QuestionEvent {}
+
+
+class SelectAnswer extends QuestionEvent {
+  final int index;
+  SelectAnswer(this.index);
+}
+
+
+class EvaluateAnswers extends QuestionEvent {}
+
+
+class NextQuestion extends QuestionEvent {}

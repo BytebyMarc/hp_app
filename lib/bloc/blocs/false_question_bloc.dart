@@ -1,73 +1,65 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'dart:math';
+import 'package:hp_app/bloc/blocs/question_bloc_base.dart';
 import 'package:hp_app/repository/getFalseQuestionsList.dart';
-import 'package:hp_app/repository/getQuestion.dart';
-import 'package:hp_app/repository/setAnswerRepository.dart';
-import 'package:hp_app/bloc/events/false_question_event.dart';
-import 'package:hp_app/bloc/states/false_question_state.dart';
+import '../../models/questionModel.dart';
+import '../states/question_state_base.dart';
+import '../events/question_event_base.dart';
+import 'dart:async';
+import '../../../repository/getQuestion.dart';
 
-class FalseQuestionBloc extends Bloc<FalseQuestionEvent, FalseQuestionState>  {
-  final GetQuestionRepository questionRepository;
-  final GetFalseQuestionList getFalseQuestionList;
-  int currentQuestionNumber = 1;
 
-  FalseQuestionBloc({ required this.questionRepository, required this.getFalseQuestionList})
-      : super(FalseQuestionLoading()) {
-    on<SelectFalseQuestion>(_onSelect);
-    on<ToggleAnswer>(_onToggle);
-    on<EvaluateAnswers>(_onEvaluate);
-    on<NextQuestion>(_onNext);
+class FalseQuestionBloc extends QuestionBlocBase {
+  final GetFalseQuestionList _falseListRepo;
+  final GetQuestionRepository _questionRepo;
+  final Random _rnd = Random();
+
+  /// Internal: alle geladenen Fragen als Modelle
+  final List<QuestionModel> _questions = [];
+
+  /// Zuletzt ausgelieferte Frage für checkAnswer()
+  late QuestionModel _current;
+
+  FalseQuestionBloc({
+    required GetFalseQuestionList falseListRepo,
+    required GetQuestionRepository questionRepo,
+  })  : _falseListRepo = falseListRepo,
+        _questionRepo = questionRepo,
+        super() {
+    _initialize();
   }
 
-  Future<void> _onSelect(SelectFalseQuestion evt, Emitter emit) async {
-    emit(FalseQuestionLoading());
+  Future<void> _initialize() async {
     try {
-      final liste = await getFalseQuestionList.fetchFalseAnswer();
-      //debugPrint(currentQuestionNumber as String?);
-        final q = await questionRepository.fetchQuestion(
-            idQuestion: liste[currentQuestionNumber].question_ID);
-        emit(FalseQuestionSelected(
-            question: q,
-            rightSequence: q.rightSequence,
-            liste: liste
-        ));
-
-    } catch (e) {
-      emit(FalseQuestionError(e.toString()));
-    }
-  }
-
-  void _onToggle(ToggleAnswer evt, Emitter emit) {
-    final state0 = state;
-    if (state0 is FalseQuestionSelected && !state0.isEvaluated) {
-      final sel = List<int>.from(state0.selectedAnswerIndices);
-      if (sel.contains(evt.index)) {
-        sel.remove(evt.index);
-      } else {
-        sel.add(evt.index);
+      // Lade IDs der falschen Fragen
+      final falseEntries = await _falseListRepo.fetchFalseAnswer();
+      // Für jede ID die Frage laden
+      for (var entry in falseEntries) {
+        final model = await _questionRepo.fetchQuestion(idQuestion: entry.question_ID);
+        _questions.add(model);
       }
-      emit(state0.copyWith(selectedAnswerIndices: sel));
+      // Erste Frage ausliefern
+      add(NextQuestion());
+    } catch (e, st) {
+      addError(e, st);
     }
   }
 
-  void _onEvaluate(EvaluateAnswers evt, Emitter emit) async{
-    final state0 = state;
-    if (state0 is FalseQuestionSelected && !state0.isEvaluated) {
-      final id = state0.question.id;
-      final userSeq = state0.selectedAnswerIndices.join(',');
-      final rightSeq = state0.rightSequence.join(',');
-      final correct = userSeq == rightSeq;
-      if(correct){
-        await SetAnswerRepository(id: id, answer: true ).save();
-      }else{
-        await SetAnswerRepository(id: id, answer: false).save();
-      }
-      emit(state0.copyWith(isEvaluated: true, isCorrect: correct));
+  @override
+  QuestionModel fetchNextQuestion() {
+    if (_questions.isEmpty) {
+      throw StateError('Keine Fragen geladen');
     }
+    // Zufällige Frage auswählen
+    _current = _questions[_rnd.nextInt(_questions.length)];
+    return _current;
   }
 
-  void _onNext(NextQuestion evt, Emitter emit) {
-    currentQuestionNumber = currentQuestionNumber +1 ;
-        add(SelectFalseQuestion());
+  @override
+  bool checkAnswer(QuestionSelected state) {
+    // Vergleiche die Mengen der ausgewählten und korrekten Indizes
+    final selectedSet = state.selectedIndices.toSet();
+    final correctSet = _current.correctAnswerIndices.toSet();
+    return selectedSet.length == correctSet.length &&
+        selectedSet.difference(correctSet).isEmpty;
   }
 }

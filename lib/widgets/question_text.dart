@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../bloc/blocs/false_question_bloc.dart';
-import '../bloc/states/false_question_state.dart';
 
 class QuestionText extends StatelessWidget {
   final String text;
