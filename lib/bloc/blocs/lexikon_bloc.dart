@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 
-import '../../models/lexikon_entry.dart';
+import '../../models/lexikon_entry_model.dart';
 import '../events/lexikon_event.dart';
 import '../states/lexikon_state.dart';
 

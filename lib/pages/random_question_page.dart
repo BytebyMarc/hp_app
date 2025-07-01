@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/repository/setAnswerRepository.dart';
-import '../repository/getQuestion.dart';
+import '../repository/get_question.dart';
 import '../bloc/blocs/random_question_bloc.dart';
 import '../bloc/events/random_question_event.dart';
 import '../bloc/states/random_question_state.dart';
-import 'package:hp_app/repository/categoryRepository.dart';
+
 
 class RandomQuestion extends StatelessWidget {
-  const RandomQuestion({Key? key}) : super(key: key);
+  const RandomQuestion({super.key});
 
   @override
   Widget build(BuildContext context) {

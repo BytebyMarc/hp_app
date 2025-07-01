@@ -1,4 +1,4 @@
-import 'package:hp_app/repository/dbConnection.dart';
+import 'package:hp_app/repository/db_connection.dart';
 
 class SetAnswerRepository {
   final int id;

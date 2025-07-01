@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class VirtualLearnBook extends StatelessWidget {
-  const VirtualLearnBook({Key? key}) : super(key: key);
+  const VirtualLearnBook({super.key});
 
   @override
   Widget build(BuildContext context) {

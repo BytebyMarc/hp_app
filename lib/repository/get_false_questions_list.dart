@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hp_app/models/falseQuestionListModel.dart';
-import 'package:hp_app/repository/dbConnection.dart';
+import 'package:hp_app/models/false_question_list_model.dart';
+import 'package:hp_app/repository/db_connection.dart';
 
 class GetFalseQuestionList{
 

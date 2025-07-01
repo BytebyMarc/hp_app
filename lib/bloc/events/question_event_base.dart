@@ -1,6 +1,3 @@
-import 'package:hp_app/bloc/blocs/question_bloc_base.dart';
-
-
 abstract class QuestionEvent {}
 
 

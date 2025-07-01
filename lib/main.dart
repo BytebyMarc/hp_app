@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/widgets/navigation/BurgerMenu.dart';
+import 'package:hp_app/widgets/navigation/burger_menu.dart';
 import 'bloc/events/lexikon_event.dart';
 import 'widgets/navigation/navigation_cubit.dart';
 import 'bloc/blocs/lexikon_bloc.dart';
-import 'theme/appTheme.dart';
+import 'theme/app_theme.dart';
 import 'package:hp_app/bloc/blocs/settings_bloc.dart';
 import 'bloc/states/setting_state.dart';
 

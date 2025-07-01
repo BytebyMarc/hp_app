@@ -1,5 +1,5 @@
-import 'package:hp_app/models/categoryModel.dart';
-import 'package:hp_app/repository/dbConnection.dart';
+import 'package:hp_app/models/category_model.dart';
+import 'package:hp_app/repository/db_connection.dart';
 
 /// Repository for reading a prepopulated categories database (read-only).
 class CategoryRepository {

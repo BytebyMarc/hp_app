@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SearchQuestion extends StatelessWidget {
-  const SearchQuestion({Key? key}) : super(key: key);
+class OriginalExamen extends StatelessWidget {
+  const OriginalExamen({super.key});
 
   @override
   Widget build(BuildContext context) {

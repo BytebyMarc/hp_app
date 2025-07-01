@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/repository/getQuestion.dart';
-import 'package:hp_app/repository/setAnswerRepository.dart';
+import 'package:hp_app/repository/get_question.dart';
+import 'package:hp_app/repository/set_answer_repository.dart';
 import '../states/random_question_state.dart';
 import '../events/random_question_event.dart';
 

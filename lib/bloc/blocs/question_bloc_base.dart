@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:hp_app/bloc/events/question_event_base.dart';
 import 'package:hp_app/bloc/states/question_state_base.dart';
-
-import '../../models/questionModel.dart';
+import '../../models/question_model.dart';
 
 abstract class QuestionBlocBase extends Bloc<QuestionEvent, QuestionState> {
   QuestionBlocBase()

@@ -1,8 +1,5 @@
-import 'package:flutter/material.dart';
 
-
-@immutable
-sealed class LexikonEvent {
+class LexikonEvent {
   const LexikonEvent();
 }
 

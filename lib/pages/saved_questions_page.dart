@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SavedQuestions extends StatelessWidget {
-  const SavedQuestions({Key? key}) : super(key: key);
+  const SavedQuestions({super.key});
 
   @override
   Widget build(BuildContext context) {

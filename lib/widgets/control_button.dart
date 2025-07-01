@@ -1,11 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter/material.dart';
-import 'package:hp_app/bloc/events/question_event_base.dart';
-import 'package:hp_app/bloc/states/question_state_base.dart';
-
-import '../bloc/blocs/false_question_bloc.dart';
-
-
 import 'package:flutter/material.dart';
 
 /// Widget für die Steuerung: Evaluieren oder Nächste Frage.
@@ -20,12 +12,12 @@ class ControlButton extends StatelessWidget {
   final VoidCallback onNext;
 
   const ControlButton({
-    Key? key,
+    super.key,
     required this.isEvaluated,
     required this.isCorrect,
     required this.onEvaluate,
     required this.onNext,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

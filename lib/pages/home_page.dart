@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/pages/categoryPage.dart';
-import 'package:hp_app/pages/falseQuestion.dart';
-import 'package:hp_app/pages/indexCards.dart';
-import 'package:hp_app/pages/originalExamen.dart';
-import 'package:hp_app/pages/randomQuestion.dart';
-import 'package:hp_app/pages/randomQuestion2.dart';
-import 'package:hp_app/pages/savedQuestions.dart';
-import 'package:hp_app/pages/searchQuestion.dart';
-import 'package:hp_app/pages/vitualLearnBook.dart';
+import 'package:hp_app/pages/category_page.dart';
+import 'package:hp_app/pages/false_question_page.dart';
+import 'package:hp_app/pages/index_cards_page.dart';
+import 'package:hp_app/pages/original_examen.dart';
+import 'package:hp_app/pages/random_question_page.dart';
+import 'package:hp_app/pages/saved_questions_page.dart';
+import 'package:hp_app/pages/search_question_page.dart';
+import 'package:hp_app/pages/virtual_learn_book_page.dart';
 import 'package:hp_app/widgets/navigation/navigation_cubit.dart';
 
 
 /// Steuert das Untermenü auf dem Home-Screen
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationHome, HomeMenuItem>(

@@ -1,4 +1,4 @@
-import '../../models/questionModel.dart';
+import '../../models/question_model.dart';
 
 
 abstract class FalseQuestionState {}

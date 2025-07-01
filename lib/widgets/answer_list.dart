@@ -19,13 +19,13 @@ class AnswerList extends StatelessWidget {
   final ValueChanged<int> onTap;
 
   const AnswerList({
-    Key? key,
+    super.key,
     required this.answers,
     required this.selectedIndices,
     required this.correctAnswerIndices,
     required this.isEvaluated,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +40,11 @@ class AnswerList extends StatelessWidget {
         if (isEvaluated) {
           if (correctAnswerIndices.contains(index)) {
             // Richtige Antworten: grün markieren und Häkchen
-            tileColor = Colors.green.withOpacity(0.2);
+            tileColor = Colors.green.withValues(alpha: 0.2);
             trailing = const Icon(Icons.check_circle, color: Colors.green);
           } else if (selected && !correctAnswerIndices.contains(index)) {
             // Falsch ausgewählte: rot markieren und Kreuz
-            tileColor = Colors.red.withOpacity(0.2);
+            tileColor = Colors.red.withValues(alpha: 0.2);
             trailing = const Icon(Icons.cancel, color: Colors.red);
           }
         }

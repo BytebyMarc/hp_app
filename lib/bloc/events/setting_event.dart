@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../blocs/settings_bloc.dart';
 import 'package:equatable/equatable.dart';
 
 @immutable

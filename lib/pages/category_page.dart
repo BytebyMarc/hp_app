@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../repository/getQuestion.dart';
+import '../repository/get_question.dart';
 import '../bloc/blocs/category_page_bloc.dart';
 import '../bloc/events/category_page_event.dart';
 import '../bloc/states/category_page_state.dart';
-import 'package:hp_app/repository/categoryRepository.dart';
+import 'package:hp_app/repository/category_repository.dart';
 
 class CategoryPage extends StatelessWidget {
-  const CategoryPage({Key? key}) : super(key: key);
+  const CategoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {

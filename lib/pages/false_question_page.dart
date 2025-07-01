@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/repository/getFalseQuestionsList.dart';
+import 'package:hp_app/repository/get_false_questions_list.dart';
 import '../bloc/events/question_event_base.dart';
 import '../bloc/states/question_state_base.dart';
 import 'package:hp_app/bloc/blocs/false_question_bloc.dart';
-import '../repository/getQuestion.dart';
-import '../widgets/QuestionText.dart';
+import '../repository/get_question.dart';
 import '../widgets/answer_list.dart';
 import '../widgets/control_button.dart';
+import '../widgets/question_text.dart';
 
 /// Seite für zufällige Mehrfachauswahl-Fragen
 /// Seite für zufällige Mehrfachauswahl-Fragen
 class FalseQuestionPage extends StatelessWidget {
-  const FalseQuestionPage({Key? key}) : super(key: key);
+  const FalseQuestionPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:hp_app/models/categoryModel.dart';
+import 'package:hp_app/models/category_model.dart';
 
-import '../../models/questionModel.dart';
+import '../../models/question_model.dart';
 
 abstract class CategoryState extends Equatable {
   const CategoryState();

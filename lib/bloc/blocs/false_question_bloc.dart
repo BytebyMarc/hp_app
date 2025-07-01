@@ -1,11 +1,11 @@
 import 'dart:math';
 import 'package:hp_app/bloc/blocs/question_bloc_base.dart';
-import 'package:hp_app/repository/getFalseQuestionsList.dart';
-import '../../models/questionModel.dart';
+import 'package:hp_app/repository/get_false_questions_list.dart';
+import '../../models/question_model.dart';
 import '../states/question_state_base.dart';
 import '../events/question_event_base.dart';
 import 'dart:async';
-import '../../../repository/getQuestion.dart';
+import '../../../repository/get_question.dart';
 
 
 class FalseQuestionBloc extends QuestionBlocBase {
@@ -34,7 +34,7 @@ class FalseQuestionBloc extends QuestionBlocBase {
       final falseEntries = await _falseListRepo.fetchFalseAnswer();
       // Für jede ID die Frage laden
       for (var entry in falseEntries) {
-        final model = await _questionRepo.fetchQuestion(idQuestion: entry.question_ID);
+        final model = await _questionRepo.fetchQuestion(idQuestion: entry.questionId);
         _questions.add(model);
       }
       // Erste Frage ausliefern

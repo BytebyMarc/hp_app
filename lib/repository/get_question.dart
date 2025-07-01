@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hp_app/models/questionModel.dart';
-import 'package:hp_app/repository/dbConnection.dart';
+import 'package:hp_app/models/question_model.dart';
+import 'package:hp_app/repository/db_connection.dart';
 import 'dart:math';
 
 /// Repository for reading a prepopulated categories database (read-only).

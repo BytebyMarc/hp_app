@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hp_app/models/lexikon_entry.dart';
+import 'package:hp_app/models/lexikon_entry_model.dart';
 
 @immutable
 sealed class LexikonState {

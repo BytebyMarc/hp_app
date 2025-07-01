@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OriginalExamen extends StatelessWidget {
-  const OriginalExamen({Key? key}) : super(key: key);
+class IndexCards extends StatelessWidget {
+  const IndexCards({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/widgets/navigation/navigation_cubit.dart';
 
-import '../../pages/home.dart';
-import '../../pages/lexikon.dart';
-import '../../pages/setting.dart';
+import '../../pages/home_page.dart';
+import '../../pages/lexikon_page.dart';
+import '../../pages/setting_page.dart';
 
 class BurgerMenu extends StatelessWidget {
   const BurgerMenu({super.key});

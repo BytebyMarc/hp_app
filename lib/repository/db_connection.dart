@@ -25,7 +25,7 @@ class DbConnection {
 
       // In Geräte-Dateisystem schreiben
       await file.writeAsBytes(bytes, flush: true);
-      print('📦 Datenbank kopiert nach $path');
+      //print('📦 Datenbank kopiert nach $path');
     }
 
     // 2) DB öffnen (Read-Only, weil vorbefüllt)
