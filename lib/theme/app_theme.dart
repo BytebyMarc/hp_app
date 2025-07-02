@@ -30,6 +30,7 @@ class AppTheme {
       textTheme: TextTheme(
           bodySmall: TextStyle(color: AppColors.textLight),
           bodyMedium: TextStyle(color: AppColors.textLight),
+          titleMedium: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w600),
           titleLarge: TextStyle(color: AppColors.primary,
               fontSize: 20,
               fontWeight: FontWeight.w600),
@@ -37,7 +38,6 @@ class AppTheme {
               fontSize: 14,
               fontWeight: FontWeight.w500)
       ),
-
 
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
@@ -98,6 +98,7 @@ class AppTheme {
     textTheme: TextTheme(
       bodySmall: TextStyle(color: AppColors.textDark),
       bodyMedium: TextStyle(color: AppColors.textDark),
+      titleMedium: TextStyle(color: AppColors.primary, fontSize: 14, fontWeight: FontWeight.w600),
       titleLarge: TextStyle(color: AppColors.primary, fontSize: 20, fontWeight: FontWeight.w600),
       labelLarge: TextStyle(color: AppColors.secondary, fontSize: 14, fontWeight: FontWeight.w500),
     ),

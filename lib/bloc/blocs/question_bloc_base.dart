@@ -4,6 +4,8 @@ import 'package:hp_app/bloc/states/question_state_base.dart';
 import '../../models/question_model.dart';
 
 abstract class QuestionBlocBase extends Bloc<QuestionEvent, QuestionState> {
+  late QuestionModel current;
+  final List<QuestionModel> questions = [];
   QuestionBlocBase()
       : super(
     QuestionSelected(
@@ -23,7 +25,6 @@ abstract class QuestionBlocBase extends Bloc<QuestionEvent, QuestionState> {
   void _onSelectAnswer(SelectAnswer event, Emitter<QuestionState> emit) {
     final s = state as QuestionSelected;
     if (!s.isEvaluated) {
-      // Toggle-Logik: Bei erneutem Klick abwählen
       final newSelection = List<int>.from(s.selectedIndices);
       if (newSelection.contains(event.index)) {
         newSelection.remove(event.index);
@@ -48,11 +49,16 @@ abstract class QuestionBlocBase extends Bloc<QuestionEvent, QuestionState> {
       selectedIndices: const [],
       isEvaluated: false,
       isCorrect: false,
-      correctAnswerIndices: next.correctAnswerIndices,  // hier setzen
+      correctAnswerIndices: next.correctAnswerIndices,
     ));
   }
   /// Muss überschrieben werden: Prüft, ob die Auswahl korrekt ist
-  bool checkAnswer(QuestionSelected state);
+  bool checkAnswer(QuestionSelected state){
+    final selectedSet = state.selectedIndices.toSet();
+    final correctSet = current.correctAnswerIndices.toSet();
+    return selectedSet.length == correctSet.length &&
+        selectedSet.difference(correctSet).isEmpty;
+  }
 
   /// Muss überschrieben werden: Nächste Frage laden
   QuestionModel fetchNextQuestion();

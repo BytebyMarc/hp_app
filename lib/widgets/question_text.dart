@@ -10,7 +10,7 @@ class QuestionText extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16.0),
       child: Text(
         text,
-        style: Theme.of(context).textTheme.titleLarge,
+        style: Theme.of(context).textTheme.titleMedium,
         textAlign: TextAlign.center,
       ),
     );
