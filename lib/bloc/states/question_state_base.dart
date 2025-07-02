@@ -4,8 +4,6 @@ abstract class QuestionState {
   final List<int> selectedIndices;
   final bool isEvaluated;
   final bool isCorrect;
-
-  /// Neu: die korrekten Antwort-Indizes
   final List<int> correctAnswerIndices;
 
   QuestionState({

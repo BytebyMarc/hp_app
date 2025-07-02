@@ -41,8 +41,8 @@ abstract class QuestionBlocBase extends Bloc<QuestionEvent, QuestionState> {
     emit(s.copyWith(isEvaluated: true, isCorrect: result));
   }
 
-  void _onNext(NextQuestion event, Emitter<QuestionState> emit) {
-    final next = fetchNextQuestion();
+  Future<void> _onNext(NextQuestion event, Emitter<QuestionState> emit) async {
+    final next = await fetchNextQuestion();
     emit(QuestionSelected(
       questionText: next.question,
       answers: next.answers,
@@ -61,6 +61,6 @@ abstract class QuestionBlocBase extends Bloc<QuestionEvent, QuestionState> {
   }
 
   /// Muss überschrieben werden: Nächste Frage laden
-  QuestionModel fetchNextQuestion();
+  Future<QuestionModel> fetchNextQuestion();
 }
 

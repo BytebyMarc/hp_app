@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/widgets/navigation/burger_menu.dart';
+import 'bloc/blocs/home_bloc.dart';
 import 'bloc/events/lexikon_event.dart';
 import 'widgets/navigation/navigation_cubit.dart';
 import 'bloc/blocs/lexikon_bloc.dart';
@@ -14,6 +15,7 @@ void main() {
   runApp(BlocProvider(
     create: (_) => NavigationCubit(),
     child: MultiBlocProvider(providers: [
+      BlocProvider(create: (_) => HomeBloc()),
       BlocProvider(create: (_) => SettingBloc()),
       BlocProvider(create: (_) => NavigationCubit()),
       BlocProvider(create: (_) => NavigationHome()),

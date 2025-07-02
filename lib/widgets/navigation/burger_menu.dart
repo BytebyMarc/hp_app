@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hp_app/widgets/navigation/navigation_cubit.dart';
-
 import '../../pages/home_page.dart';
 import '../../pages/lexikon_page.dart';
 import '../../pages/setting_page.dart';
@@ -12,7 +11,17 @@ class BurgerMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Hppsy Examen App')),
+      appBar: AppBar(
+        title: Text('Hppsy Examen App'),
+
+        actions: [
+          IconButton(icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                context.read<NavigationHome>().selectHomeMenu(HomeMenuItem.home);
+
+              }),
+        ],
+      ),
 
       drawer: _AppDrawer(),
       body: BlocBuilder<NavigationCubit, MenuItem>(

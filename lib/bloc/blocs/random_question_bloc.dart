@@ -1,63 +1,42 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/repository/get_question.dart';
-import 'package:hp_app/repository/set_answer_repository.dart';
-import '../states/random_question_state.dart';
-import '../events/random_question_event.dart';
+import 'package:hp_app/bloc/blocs/question_bloc_base.dart';
+import '../../models/question_model.dart';
+import '../events/question_event_base.dart';
+import 'dart:async';
+import '../../../repository/get_question.dart';
 
-class RandomQuestionBloc extends Bloc<RandomQuestionEvent, RandomQuestionState> {
-  final GetQuestionRepository questionRepository;
+class RandomQuestionBloc extends QuestionBlocBase {
+  final GetQuestionRepository _questionRepo;
+  int _number = 0;
 
-
-  RandomQuestionBloc({ required this.questionRepository})
-      : super(RandomQuestionLoading()) {
-    on<SelectRandomQuestion>(_onSelect);
-    on<ToggleAnswer>(_onToggle);
-    on<EvaluateAnswers>(_onEvaluate);
-    on<NextQuestion>(_onNext);
+  RandomQuestionBloc({
+    required GetQuestionRepository questionRepo,
+  })  :
+        _questionRepo = questionRepo,
+        super() {
+    _initialize();
   }
 
-  Future<void> _onSelect(SelectRandomQuestion evt, Emitter emit) async {
-    emit(RandomQuestionLoading());
+  Future<void> _initialize() async {
     try {
-      final q = await questionRepository.fetchQuestion();
-      emit(RandomQuestionSelected(
-        question: q, rightSequence: [],
-      ));
-    } catch (e) {
-      emit(RandomQuestionError(e.toString()));
+        final model = await _questionRepo.fetchQuestion();
+        questions.add(model);
+      add(NextQuestion());
+    } catch (e, st) {
+      addError(e, st);
     }
   }
 
-  void _onToggle(ToggleAnswer evt, Emitter emit) {
-    final state0 = state;
-    if (state0 is RandomQuestionSelected && !state0.isEvaluated) {
-      final sel = List<int>.from(state0.selectedAnswerIndices);
-      if (sel.contains(evt.index)) {
-        sel.remove(evt.index);
-      } else {
-        sel.add(evt.index);
-      }
-      emit(state0.copyWith(selectedAnswerIndices: sel));
+  @override
+  Future<QuestionModel> fetchNextQuestion() async {
+    if (questions.isEmpty) {
+      throw StateError('Keine Fragen geladen');
+    }try {
+      final model = await _questionRepo.fetchQuestion();
+      questions.add(model);
+    }catch(e, st){
+      addError(e, st);
     }
-  }
-
-  void _onEvaluate(EvaluateAnswers evt, Emitter emit) async{
-    final state0 = state;
-    if (state0 is RandomQuestionSelected && !state0.isEvaluated) {
-      final id = state0.question.id;
-      final userSeq = state0.selectedAnswerIndices.join(',');
-      final rightSeq = state0.rightSequence.join(',');
-      final correct = userSeq == rightSeq;
-      if(correct){
-        await SetAnswerRepository(id: id, answer: true ).save();
-      }else{
-        await SetAnswerRepository(id: id, answer: false).save();
-      }
-      emit(state0.copyWith(isEvaluated: true, isCorrect: correct));
-    }
-  }
-
-  void _onNext(NextQuestion evt, Emitter emit) {
-    add(SelectRandomQuestion());
+    current = questions[_number++];
+    return current;
   }
 }

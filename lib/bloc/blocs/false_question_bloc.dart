@@ -34,7 +34,7 @@ class FalseQuestionBloc extends QuestionBlocBase {
   }
 
   @override
-  QuestionModel fetchNextQuestion() {
+  Future<QuestionModel> fetchNextQuestion() async {
     if (questions.isEmpty) {
       throw StateError('Keine Fragen geladen');
     }

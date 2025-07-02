@@ -18,7 +18,7 @@ class FalseQuestionPage extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Zufällige Fragen (Mehrfachauswahl)'),
+          title: const Text('Falsche Fragen (Mehrfachauswahl)'),
         ),
         body: const QuestionView<FalseQuestionBloc>(),
       ),

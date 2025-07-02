@@ -46,6 +46,12 @@ class HomeScreen extends StatelessWidget {
 
 /// Die Card-Liste mit deinen Home-Untermenüpunkten
 class _HomeMenuList extends StatelessWidget {
+
+
+
+
+
+
   final List<_Entry> _entries = [
     _Entry(HomeMenuItem.kategorien, 'Kategorien', 'Prüfungsfragen nach Kategorien', Icons.category),
     _Entry(HomeMenuItem.randomQuestion, 'Zufällige Frage', 'Fragen werden zufällig ausgewählt', Icons.category),
