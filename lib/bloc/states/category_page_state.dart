@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:hp_app/models/category_model.dart';
-
 import '../../models/question_model.dart';
 
 abstract class CategoryState extends Equatable {
@@ -14,7 +13,6 @@ class CategoriesLoading extends CategoryState {}
 
 class CategoriesLoaded extends CategoryState {
   final List<Category> categories;
-
   const CategoriesLoaded(this.categories);
 
   @override
@@ -55,7 +53,6 @@ class CategorySelected extends CategoryState {
 
 class CategoriesError extends CategoryState {
   final String message;
-
   const CategoriesError(this.message);
 
   @override
