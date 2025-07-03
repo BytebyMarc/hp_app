@@ -19,6 +19,7 @@ void main() {
       BlocProvider(create: (_) => SettingBloc()),
       BlocProvider(create: (_) => NavigationCubit()),
       BlocProvider(create: (_) => NavigationHome()),
+      BlocProvider(create: (_) => NavigationCategory()),
       BlocProvider(create: (_) => LexikonBloc()..add(LoadLexikon())),
         ], child: const MyApp())
   ),

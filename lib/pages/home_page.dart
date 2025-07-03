@@ -9,8 +9,6 @@ import 'package:hp_app/pages/saved_questions_page.dart';
 import 'package:hp_app/pages/search_question_page.dart';
 import 'package:hp_app/pages/virtual_learn_book_page.dart';
 import 'package:hp_app/widgets/navigation/navigation_cubit.dart';
-
-
 /// Steuert das Untermenü auf dem Home-Screen
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -38,6 +36,8 @@ class HomeScreen extends StatelessWidget {
             return VirtualLearnBook();
           case HomeMenuItem.karteikarten:
             return IndexCards();
+          case HomeMenuItem.selectedCategory:
+            return FalseQuestionPage();
         }
       },
     );
@@ -46,11 +46,6 @@ class HomeScreen extends StatelessWidget {
 
 /// Die Card-Liste mit deinen Home-Untermenüpunkten
 class _HomeMenuList extends StatelessWidget {
-
-
-
-
-
 
   final List<_Entry> _entries = [
     _Entry(HomeMenuItem.kategorien, 'Kategorien', 'Prüfungsfragen nach Kategorien', Icons.category),

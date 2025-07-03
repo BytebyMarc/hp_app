@@ -26,6 +26,7 @@ enum HomeMenuItem {
   frageSuche,
   virtuellesLehrbuch,
   karteikarten,
+  selectedCategory,
 }
 class NavigationCubit extends Cubit<MenuItem> {
   NavigationCubit() : super(MenuItem.home);
@@ -36,3 +37,34 @@ class NavigationHome extends Cubit<HomeMenuItem> {
   NavigationHome() : super(HomeMenuItem.home);
   void selectHomeMenu(HomeMenuItem item) => emit(item);
 }
+
+class NavigationCategory extends Cubit<NavigationCategoryState> {
+  NavigationCategory()
+      : super(NavigationCategoryState(menu: HomeMenuItem.home));
+  // Speichere nur die ID
+  void selectCategory(int idCategory) {
+    emit(NavigationCategoryState(
+      menu: HomeMenuItem.selectedCategory,
+      categoryId: idCategory,
+    ));
+  }
+
+  // Optional zurück
+  void goHome() {
+    emit(NavigationCategoryState(menu: HomeMenuItem.home));
+  }
+}
+
+class NavigationCategoryState {
+  final HomeMenuItem menu;
+  final int? categoryId;
+
+  NavigationCategoryState({
+    required this.menu,
+    this.categoryId,
+  });
+}
+
+
+
+
