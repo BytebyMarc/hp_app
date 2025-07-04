@@ -4,9 +4,9 @@ import '../repository/get_question.dart';
 import '../bloc/blocs/category_bloc.dart';
 import '../bloc/events/category_event.dart';
 import '../bloc/states/category_state.dart';
-import 'package:hp_app/repository/category_repository.dart';
+import 'package:hp_app/repository/get_category_list_repository.dart';
 import '../widgets/navigation/navigation_cubit.dart';
-import 'false_question_page.dart';
+import 'category_question_page.dart';
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
@@ -28,7 +28,7 @@ class CategoryPage extends StatelessWidget {
           builder: (context, navState) {
             if (navState.menu == HomeMenuItem.selectedCategory &&
                 navState.categoryId != null) {
-              return FalseQuestionPage();
+              return CategoryQuestionPage(catID: navState.categoryId!);
             }
             return BlocBuilder<CategoryPageBloc, CategoryState>(
               builder: (context, state) {

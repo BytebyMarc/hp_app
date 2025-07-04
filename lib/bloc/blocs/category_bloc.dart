@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hp_app/repository/category_repository.dart';
+import 'package:hp_app/repository/get_category_list_repository.dart';
 import 'package:hp_app/repository/get_question.dart';
 import '../events/category_event.dart';
 import '../states/category_state.dart';
